@@ -1,13 +1,13 @@
 
 
-const ProductItem = (products) => {
-
+const ProductItem = (props) => {
   return <>
-    {products.data.map((prod) => {
+    {
+    props.products.map((prod) => {
         return <tr>
                 <td>{prod.id}</td>
-                <td>{prod.branch}</td>
                 <td>{prod.description}</td>
+                <td>{prod.branch}</td>
                 <td>{prod.price}</td>
               </tr>
       })
