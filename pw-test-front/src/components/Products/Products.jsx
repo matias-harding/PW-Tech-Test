@@ -7,7 +7,8 @@ import './Products.scss'
 const Products = () => {
 
   const [prodList,setProdList] = useState([]);
-  const [searchValue,setSearchValue] = useState([]);
+  const [searchValue,setSearchValue] = useState("");
+  const [selectValue, setSelectValue] = useState(0)
 
 
   useEffect(()=>{
@@ -18,10 +19,17 @@ const Products = () => {
   },[])
 
   const handleChange = (event) => {
-    this.setState({value: event.target.value});
+    console.log("🚀 ~ file: Products.jsx:24 ~ handleChange ~ event.target.value", event.target.value)
+    setSearchValue(event.target.value);
+  }
+
+  const handleSelect = (event) => {
+    console.log("🚀 ~ file: Products.jsx:26 ~ handleSelect ~ event", event.target.value)
+    setSelectValue(event.target.value);
   }
 
   const handleSubmit = (event) => {
+    console.log("🚀 ~ file: Products.jsx:25 ~ handleSubmit ~ event", event)
     event.preventDefault();
   }
 
@@ -34,19 +42,27 @@ const Products = () => {
             <div className='product-search'>
               <form onSubmit={handleSubmit}>
                 <label>
-                  Name:
+                  Buscar:
                   <input type="text" value={searchValue} onChange={handleChange} />
                 </label>
-                <input type="submit" value="Submit" />
+                <select defaultValue={selectValue} onChange={handleSelect} >
+                  <option value="0">Nombre/Marca</option>
+                  <option value="1">Id</option>
+                </select>
+                <input type="submit" value="Buscar" />
               </form>
             </div>
 
             {/* Product List */}
             <table >
-              <tr>
-                <td>id</td><td>Nombre</td><td>Marca</td><td>Precio</td>
-              </tr>
-              <ProductItems products={prodList} />
+              <thead>
+                <tr>
+                  <td>id</td><td>Nombre</td><td>Marca</td><td>Precio</td>
+                </tr>
+              </thead>
+              <tbody>
+                <ProductItems products={prodList} />
+              </tbody>
             </table>
           </main>
           <footer>
