@@ -6,27 +6,47 @@ import './Products.scss'
 
 const Products = () => {
 
-  const [postList,setPostList] = useState([]);
+  const [prodList,setProdList] = useState([]);
+  const [searchValue,setSearchValue] = useState([]);
 
 
   useEffect(()=>{
     Axios.get("http://localhost:3001/api/get").then((data)=>{
         console.log(data)
-        setPostList(data.data)
+        setProdList(data.data)
     });
   },[])
 
+  const handleChange = (event) => {
+    this.setState({value: event.target.value});
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+  }
 
   return <div className="App">
           <header className="App-header">
             Productos
           </header>
-          <main className="products-container">     
+          <main className="products-container">
+            {/* Product Search */}
+            <div className='product-search'>
+              <form onSubmit={handleSubmit}>
+                <label>
+                  Name:
+                  <input type="text" value={searchValue} onChange={handleChange} />
+                </label>
+                <input type="submit" value="Submit" />
+              </form>
+            </div>
+
+            {/* Product List */}
             <table >
               <tr>
                 <td>id</td><td>Nombre</td><td>Marca</td><td>Precio</td>
               </tr>
-              <ProductItems products={postList} />
+              <ProductItems products={prodList} />
             </table>
           </main>
           <footer>
