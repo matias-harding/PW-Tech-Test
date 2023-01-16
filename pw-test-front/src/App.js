@@ -3,8 +3,8 @@ import { createBrowserRouter,
   RouterProvider, 
 } from 'react-router-dom';
 
-import Welcome from './components/Client/Welcome';
-import Products from './components/Client/Products';
+import Welcome from './components/Welcome';
+import Products from './components/Products/Products';
 
 const router = createBrowserRouter([
   {path: '/', element: <Welcome />},
