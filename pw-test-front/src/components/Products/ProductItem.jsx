@@ -1,6 +1,8 @@
 
 
 const ProductItem = (props) => {
+
+
   return <>
           <table >
             <thead>
@@ -12,11 +14,11 @@ const ProductItem = (props) => {
             {
               props.products.map((prod) => {
                 return <tr key={prod.id}>
-                        <td>{prod.id}</td>
-                        <td>{prod.description}</td>
-                        <td>{prod.branch}</td>
-                        <td>{prod.price}</td>
-                      </tr>
+                <td>{prod.id}</td>
+                <td>{prod.description}</td>
+                <td>{prod.branch}</td>
+                <td>{prod.price}</td>
+              </tr>
               })
             }
             </tbody>

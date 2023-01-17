@@ -19,18 +19,27 @@ const Products = () => {
   },[])
 
   const handleChange = (event) => {
-    console.log("🚀 ~ file: Products.jsx:24 ~ handleChange ~ event.target.value", event.target.value)
     setSearchValue(event.target.value);
   }
 
   const handleSelect = (event) => {
-    console.log("🚀 ~ file: Products.jsx:26 ~ handleSelect ~ event", event.target.value)
     setSelectValue(event.target.value);
   }
 
   const handleSubmit = (event) => {
     console.log("🚀 ~ file: Products.jsx:25 ~ handleSubmit ~ event", event)
     event.preventDefault();
+    if(parseInt(selectValue) === 0 ){
+      // Axios.get(`http://localhost:3001/api/products/byNameOrBrand/${searchValue}`).then((data)=>{
+      //   console.log(data)
+      //   setProdList(data.data)
+      // });
+    } else {
+      Axios.get(`http://localhost:3001/api/products/${searchValue}`).then((data)=>{
+        console.log(data)
+        setProdList(data.data)
+      });
+    }
   }
 
   return <div className="App">
@@ -41,10 +50,7 @@ const Products = () => {
             {/* Product Search */}
             <div className='product-search'>
               <form onSubmit={handleSubmit}>
-                <label>
-                  Buscar:
-                  <input type="text" value={searchValue} onChange={handleChange} />
-                </label>
+                <input type="text" value={searchValue} onChange={handleChange} />
                 <select defaultValue={selectValue} onChange={handleSelect} >
                   <option value="0">Nombre/Marca</option>
                   <option value="1">Id</option>
@@ -54,7 +60,7 @@ const Products = () => {
             </div>
 
             {/* Product List */}
-            <ProductItems products={prodList} />
+            <ProductItems products={prodList} selectValue={selectValue} />
           </main>
           <footer>
             <p>Dev: Matias Harding</p>

@@ -16,11 +16,23 @@ db.query("SELECT * FROM product", (err,result)=>{
 res.send(result)
 });   });
 
-// Route to get one product
+// Route to get one product by Id
 app.get("/api/products/:id", (req,res)=>{
 
 const id = req.params.id;
  db.query("SELECT * FROM product WHERE id = ?", id, 
+ (err,result)=>{
+    if(err) {
+    console.log(err)
+    } 
+    res.send(result)
+    });   });
+
+// Route to get one product by Name/Brand
+app.get("/api/products/byNameOrBrand/:search", (req,res)=>{
+
+const search = req.params.search;
+ db.query("SELECT * FROM product WHERE description = ? OR branch = ?", search, 
  (err,result)=>{
     if(err) {
     console.log(err)
