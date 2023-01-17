@@ -2,9 +2,9 @@
 
 const ProductItem = (props) => {
 
-  const productsList = (products) =>{
+  const productsList = (products) => {
     let displayRows = <tr><td colSpan="4">No hay Resultados</td></tr>
-    if(products){
+    if(products !== undefined && products.length ){
       displayRows = products.map((prod) => {
         return <tr key={prod.id}>
         <td>{prod.id}</td>

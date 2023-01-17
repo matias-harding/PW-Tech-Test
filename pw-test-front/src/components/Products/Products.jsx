@@ -36,8 +36,6 @@ const Products = () => {
       });
     } else {
       if(parseInt(selectValue) === 0 ){
-        console.log("🚀 ~ file: Products.jsx:40 ~ handleSubmit ~ selectValue", selectValue)
-        
         Axios.get(`http://localhost:3001/api/products/byNameOrBrand/${trimValue}`).then((data)=>{
           console.log(data)
           setProdList(data.data)
