@@ -28,19 +28,28 @@ const Products = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if(parseInt(selectValue) === 0 ){
-      const trimValue = searchValue.trim();
-      if(trimValue === ''){ return } 
-      Axios.get(`http://localhost:3001/api/products/byNameOrBrand/${trimValue}`).then((data)=>{
+    const trimValue = searchValue.trim();
+    if(trimValue === ''){
+      Axios.get("http://localhost:3001/api/get").then((data)=>{
         console.log(data)
         setProdList(data.data)
       });
     } else {
-      Axios.get(`http://localhost:3001/api/products/${searchValue}`).then((data)=>{
-        console.log(data)
-        setProdList(data.data)
-      });
+      if(parseInt(selectValue) === 0 ){
+        console.log("🚀 ~ file: Products.jsx:40 ~ handleSubmit ~ selectValue", selectValue)
+        
+        Axios.get(`http://localhost:3001/api/products/byNameOrBrand/${trimValue}`).then((data)=>{
+          console.log(data)
+          setProdList(data.data)
+        });
+      } else {
+        Axios.get(`http://localhost:3001/api/products/${searchValue}`).then((data)=>{
+          console.log(data)
+          setProdList(data.data)
+        });
+      }
     }
+
   }
 
   return <div className="App">
