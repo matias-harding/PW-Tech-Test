@@ -31,14 +31,15 @@ const id = req.params.id;
 // Route to get one product by Name/Brand
 app.get("/api/products/byNameOrBrand/:search", (req,res)=>{
 
-const search = req.params.search;
- db.query("SELECT * FROM product WHERE description = ? OR branch = ?", search, 
- (err,result)=>{
-    if(err) {
-    console.log(err)
-    } 
-    res.send(result)
-    });   });
+const search = `%${req.params.search}%`;
+
+db.query("SELECT * FROM product WHERE description LIKE ? OR branch LIKE ?", [search, search], 
+(err,result)=>{
+  if(err) {
+  console.log(err)
+  } 
+  res.send(result)
+  });   });
 
 app.listen(PORT, ()=>{
     console.log(`Server is running on ${PORT}`)
