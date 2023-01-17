@@ -2,6 +2,20 @@
 
 const ProductItem = (props) => {
 
+  const productsList = (products) =>{
+    let displayRows = <tr><td colSpan="4">No hay Resultados</td></tr>
+    if(products){
+      displayRows = products.map((prod) => {
+        return <tr key={prod.id}>
+        <td>{prod.id}</td>
+        <td>{prod.description}</td>
+        <td>{prod.branch}</td>
+        <td>{prod.price}</td>
+      </tr>
+      })
+    }
+    return displayRows
+  }
 
   return <>
           <table >
@@ -12,14 +26,7 @@ const ProductItem = (props) => {
             </thead>
             <tbody>    
             {
-              props.products.map((prod) => {
-                return <tr key={prod.id}>
-                <td>{prod.id}</td>
-                <td>{prod.description}</td>
-                <td>{prod.branch}</td>
-                <td>{prod.price}</td>
-              </tr>
-              })
+              productsList(props.products)
             }
             </tbody>
           </table>

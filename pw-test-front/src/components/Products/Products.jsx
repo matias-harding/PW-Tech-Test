@@ -27,13 +27,14 @@ const Products = () => {
   }
 
   const handleSubmit = (event) => {
-    console.log("🚀 ~ file: Products.jsx:25 ~ handleSubmit ~ event", event)
     event.preventDefault();
     if(parseInt(selectValue) === 0 ){
-      // Axios.get(`http://localhost:3001/api/products/byNameOrBrand/${searchValue}`).then((data)=>{
-      //   console.log(data)
-      //   setProdList(data.data)
-      // });
+      const trimValue = searchValue.trim();
+      if(trimValue === ''){ return } 
+      Axios.get(`http://localhost:3001/api/products/byNameOrBrand/${trimValue}`).then((data)=>{
+        console.log(data)
+        setProdList(data.data)
+      });
     } else {
       Axios.get(`http://localhost:3001/api/products/${searchValue}`).then((data)=>{
         console.log(data)
