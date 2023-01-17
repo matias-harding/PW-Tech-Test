@@ -54,16 +54,7 @@ const Products = () => {
             </div>
 
             {/* Product List */}
-            <table >
-              <thead>
-                <tr>
-                  <td>id</td><td>Nombre</td><td>Marca</td><td>Precio</td>
-                </tr>
-              </thead>
-              <tbody>
-                <ProductItems products={prodList} />
-              </tbody>
-            </table>
+            <ProductItems products={prodList} />
           </main>
           <footer>
             <p>Dev: Matias Harding</p>
